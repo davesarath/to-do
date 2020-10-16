@@ -10,7 +10,7 @@ import { TodoServeService } from '../todo-serve.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild('closebutton') closebutton;
+  @ViewChild('closebutton',{ static: true}) closebutton;
  
   todoList;
   constructor(private serve: TodoServeService,private router:Router) { }
@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
   });
 
   addTaskFn(form){
-    console.log(form);
-    console.log(form.value);
+    // console.log(form);
+    // console.log(form.value);
     this.serve.createTask(form.value).subscribe(
       Response=>{
         this.getTaskList();
@@ -47,8 +47,7 @@ export class HomeComponent implements OnInit {
     this.serve.viewTaskList().subscribe(
       Response=>{
         this.todoList=Response['data'];
-        console.log(this.todoList);
-        
+        // console.log(this.todoList);
       },
       error=>{
         console.log('something went wrong');        

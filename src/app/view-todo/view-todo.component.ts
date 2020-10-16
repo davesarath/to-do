@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./view-todo.component.css']
 })
 export class ViewTodoComponent implements OnInit {
-  @ViewChild('closebutton') closebutton;
+  @ViewChild('closebutton',{ static: true}) closebutton;
   id=0;
   data;
   constructor(private serve: TodoServeService,private router:Router,public route: ActivatedRoute) { }
@@ -23,7 +23,7 @@ export class ViewTodoComponent implements OnInit {
     this.serve.viewTask(this.id).subscribe(
       Response=>{
         this.data=Response['data'];
-        console.log(this.data);
+        // console.log(this.data);
         
       },error=>{
         console.log(error);        
@@ -39,7 +39,7 @@ export class ViewTodoComponent implements OnInit {
     this.serve.updateTask(this.id,form.value).subscribe(
       Response=>{
         this.data=Response['data'];
-        console.log(Response);
+        // console.log(Response);
         this.closebutton.nativeElement.click();        
       },error=>{
         console.log(error);
@@ -50,7 +50,8 @@ export class ViewTodoComponent implements OnInit {
   removeTask(){
     this.serve.deleteTask(this.id).subscribe(
       Response=>{
-        console.log(Response);
+        console.log('deleting...');
+        this.router.navigate(['/']);
       },error=>{
         console.log(error);        
       }

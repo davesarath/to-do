@@ -20,17 +20,17 @@ export class SigninComponent implements OnInit {
   });
 
   loginFn(f){
-    console.log(f.value);
+    // console.log(f.value);
     this.serve.userLogin(f.value).subscribe(Response=>
       {
       // console.log(Response);
-      alert('sucessfuly logged in')
+      // alert('sucessfuly logged in')
       this.router.navigate(['/']);
       
     },error=>{
-      console.log(error);
+      // console.log(error);
       this.loginError=error.error.errors;
-      console.log(this.loginError);
+      // console.log(this.loginError);
       
 
     })
@@ -48,16 +48,16 @@ export class SigninComponent implements OnInit {
 
 
   registerFn(d){
-    console.log(d.value);
+    // console.log(d.value);
     
     this.serve.userRegister(d.value).subscribe(Response=>{
-      console.log(Response);
-      alert('sucessfuly registered')
+      // console.log(Response);
+      // alert('sucessfuly registered')
     
       this.router.navigate(['/']);
 
     },error=>{
-      console.log(error);
+      // console.log(error);
       // this.registerForm.setErrors({notUnique:true});
       if(error.error.errors.email){
         this.registerForm.get('email').setErrors({notUnique:true})
@@ -65,8 +65,8 @@ export class SigninComponent implements OnInit {
       if(error.error.errors.username){
         this.registerForm.get('username').setErrors({notUnique:true})
       }
-        console.log(this.registerForm);    
-      alert('something went weong')
+      //   console.log(this.registerForm);    
+      // alert('something went weong')
     })
     
   }
