@@ -1,0 +1,98 @@
+
+    <div class="container mt-2 mb-4">
+        <div class="col-sm-8 ml-auto mr-auto">
+          <ul class="nav nav-pills nav-fill mb-1" id="pills-tab" role="tablist" (click)='reset()'>
+            <li class="nav-item"> <a class="nav-link active" id="pills-signin-tab" data-toggle="pill" href="#pills-signin" role="tab" aria-controls="pills-signin" aria-selected="true">Sign In</a> </li>
+            <li class="nav-item"> <a class="nav-link" id="pills-signup-tab" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="false">Sign Up</a> </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-signin" role="tabpanel" aria-labelledby="pills-signin-tab">
+              <div class="col-sm-12 border border-primary shadow rounded pt-2">
+                <div class="text-center"><img src="/assets/img/default.png" width="80px" class="rounded-circle border p-1"></div>
+
+
+                  <div class="alert text-danger " *ngIf="loginError!=false" > <em> {{loginError}}</em></div>
+
+                <form [formGroup]="loginForm" (ngSubmit)="loginFn(loginForm)" id="singninFrom">
+                  <div class="form-group">
+                    <label class="font-weight-bold">Email <span class="text-danger">*</span></label>
+                    <input type="email" formControlName="email" id="email" class="form-control" placeholder="Enter valid email">
+                    
+                      <div  class="alert text-danger " *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched">
+                        <div *ngIf="loginForm.get('email').errors.required" > <em> Required!</em></div>
+                        <div *ngIf="loginForm.get('email').errors.email" > <em> Invalid Email id!</em></div>
+                      </div>
+
+                  </div>
+                  <div class="form-group">
+                    <label class="font-weight-bold">Password <span class="text-danger">*</span></label>
+                    <input type="password" formControlName="password" id="password" class="form-control" placeholder="***********" required>
+                      <div  class="alert text-danger " *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched">
+                        <div *ngIf="loginForm.get('password').errors.required" > <em> Required!</em></div>
+                      </div>
+
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" [disabled]="loginForm.invalid" name="submit" value="Sign In" class="btn btn-block btn-primary">
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
+              <div class="col-sm-12 border border-primary shadow rounded pt-2">
+                <div class="text-center"><img src="/assets/img/default.png" width="80px" class="rounded-circle border p-1"></div>
+                  <form  [formGroup]="registerForm" (ngSubmit)="registerFn(registerForm)" id="singnupFrom">
+    
+                  <div class="form-group">
+                    <label class="font-weight-bold">Email <span class="text-danger">*</span></label>
+                    <input type="email" formControlName="email" id="signupemail" class="form-control" placeholder="Enter valid email" required>
+
+                        <div  class="alert text-danger " *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched">
+                            <div *ngIf="registerForm.get('email').errors.required" > <em> Required!</em></div>
+                            <div *ngIf="registerForm.get('email').errors.email" > <em> Invalid Email id!</em></div>
+                            <div *ngIf="registerForm.get('email').errors.notUnique" > <em> Duplicate Email id!</em></div>
+                        </div>
+
+                  </div>
+                  <div class="form-group">
+                    <label class="font-weight-bold">User Name <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="username" id="signupusername" class="form-control" placeholder="Choose your user name" required>
+                    
+                    <div  class="alert text-danger " *ngIf="registerForm.get('username').invalid && registerForm.get('username').touched">
+                      <div *ngIf="registerForm.get('username').errors.required" > <em> Required!</em></div>
+                      <div *ngIf="registerForm.get('username').errors.notUnique" > <em> Duplicate username!</em></div>
+                  </div>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label class="font-weight-bold">Password <span class="text-danger">*</span></label>
+                    <input type="password" formControlName="password1" id="signuppassword" class="form-control" placeholder="***********" pattern="^\S{6,}$">
+                        <div  class="alert text-danger " *ngIf="registerForm.get('password1').invalid && registerForm.get('password1').touched">
+                          <div *ngIf="registerForm.get('password1').errors.required" > <em> Required!</em></div>
+                          <div *ngIf="registerForm.get('password1').errors.minlength" > <em> Password should be of minimum 8 characters!</em></div>
+                        </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="font-weight-bold">Confirm Password <span class="text-danger">*</span></label>
+                    <input type="password" formControlName="password" id="signupcpassword" class="form-control"  placeholder="***********" >
+                    
+                      <div  class="alert text-danger " *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched">
+                        <div *ngIf="registerForm.get('password').errors.required" > <em> Required!</em></div>
+                        <div *ngIf="registerForm.get('password').errors.invalid" > <em> password not matching!</em></div>
+                    </div>
+
+                  </div>
+                  
+                  <div class="form-group">
+                    <input type="submit" [disabled]="registerForm.invalid" name="signupsubmit" value="Sign Up" class="btn btn-block btn-primary">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+   
+        
+      </div>

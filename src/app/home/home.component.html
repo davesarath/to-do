@@ -1,0 +1,63 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" [routerLink]="['/' ]" ><i class="fa fa-home" style="font-size:20px;" aria-hidden="true"></i> List</a>
+    <button class="navbar-toggler" type="button" (click) = 'logoutFn()' >
+        <i class="fa fa-sign-out" style="font-size:20px;color:red"></i> Log out
+    </button>
+</nav>
+
+<div class="col text-right"> <a href="javascript:;" data-toggle="modal" data-target="#newtask"  >Add new</a> </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="newtask" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <form [formGroup]="addTaskForm" (ngSubmit)="addTaskFn(addTaskForm)" id="forgotpassForm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Add New Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"  #closebutton > <span aria-hidden="true">&times;</span> </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>Title <span class="text-danger">*</span></label>
+                      <input type="email" formControlName="title" id="titlr" class="form-control" placeholder="Enter title..." >
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status <span class="text-danger">*</span></label>
+                        <select formControlName="status" id="status" class="form-control">
+                            <option value="todo">TODO</option>
+                            <option value="wip">WIP</option>
+                            <option value="done">DONE</option>
+                          </select>
+                      </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" [disabled]="addTaskForm.invalid" class="btn btn-primary"><i class="fa fa-envelope"></i> Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+<div class="row">
+  <div class=" col-md-6 col-lg-4 col-sm-12" *ngFor="let item of todoList ">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{item.title}}</h5>
+        <p class="card-text">{{item.status}}</p>
+        <a href="#"  [routerLink]="['/todo', item.id]" class="btn btn-primary">Vist....</a>
+      </div>
+    </div>
+  </div>
+</div>

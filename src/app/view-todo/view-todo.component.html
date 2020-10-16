@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#" [routerLink]="['/' ]" ><i class="fa fa-home" style="font-size:20px;" aria-hidden="true"></i> List</a>
+    <button class="navbar-toggler" type="button" (click) = 'logoutFn()' >
+        <i class="fa fa-sign-out" style="font-size:20px;color:red"></i> Log out
+    </button>
+</nav>
+
+
+<div class="btn btn-warning btn-lg btn-block"> <a href="javascript:;" data-toggle="modal" data-target="#edittask" (click)='setupEditTask()'>Update</a> </div>
+
+<table class="table">
+   
+    <tbody>
+      <tr>
+        <th scope="row"></th>
+        <td>title</td>
+        <td>{{data.title}}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>status</td>
+        <td>{{data.status}}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>created on</td>
+        <td>{{data.created_at}}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row"></th>
+        <td>updated on</td>
+        <td>{{data.updated_at}}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+<button type="button" (click)='removeTask()' class="btn btn-danger btn-lg btn-block"> Delete</button>
+  
+        <!-- Modal -->
+        <div class="modal fade" id="edittask" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <form [formGroup]="TaskForm" (ngSubmit)="updateTaskDetails(TaskForm)">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Update Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"  #closebutton > <span aria-hidden="true">&times;</span> </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>Title <span class="text-danger">*</span></label>
+                      <input type="email" formControlName="title" id="title" class="form-control" placeholder="Enter title..." >
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status <span class="text-danger">*</span></label>
+                        <select formControlName="status" id="status" class="form-control">
+                            <option value="todo">TODO</option>
+                            <option value="wip">WIP</option>
+                            <option value="done">DONE</option>
+                          </select>
+                      </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" [disabled]="TaskForm.invalid" class="btn btn-primary"><i class="fa fa-envelope"></i> Submit</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+        </div>
